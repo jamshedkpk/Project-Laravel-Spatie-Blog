@@ -1,0 +1,42 @@
+To Check a user has a role or not
+@role('admin')
+
+@endrole
+
+To Check a user has a permission or not
+$user="jamshed khan";
+$user->hasDirectPermission('create-user')
+@can('create-user')
+@endcan
+
+To assign a role to a user
+$user="jamshed khan";
+$user->assignRole('admin');
+
+To remove a role from user
+$user="jamshed khan";
+$user->revokeRole('admin');
+
+To assign a permission to a user
+$user="jamshed khan";
+$user->givePermission('create-user')
+
+To remove a permission from a user
+$user="jamshed khan";
+$user->revokePermissionTo('create-user');
+
+To assign a permission to a role
+$role="admin";
+$role->givePermissionTo('create-user');
+
+To remove a permission from a role
+$role="admin";
+$role->revokePermissionTo('create-user);
+
+To assign a role to a permission
+$permission="create-user";
+$permission->assignRole('admin');
+
+To remove a role from a permission
+$permission="create-user";
+$permission->revokeRole('admin');

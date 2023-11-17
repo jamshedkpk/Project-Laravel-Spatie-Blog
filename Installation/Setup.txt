@@ -1,0 +1,66 @@
+=====> CRUD operation by using Laravel Spatie Permission Package <=====
+
+=====> Install Laravel 
+laravel new Project-Laravel-Spatie-Permission
+cd Project-Laravel-Spatie-Permission
+
+=====> Configure database in .env file
+create a database and configure .env file as shown
+
+=====> Create seeder & run migrations
+create models, migrations, factories, seeders & controllers
+php artisan make:model category -m -f -s
+php artisan make:model post -m -f -s
+php artisan make:controller Admin\AdminController
+php artisan make:controller Admin\UserController
+php artisan make:controller Admin\RoleController
+php artisan make:controller Admin\PermissionController
+php artisan make:controller Admin\CategoryController
+php artisan make:controller Admin\PostController
+php artisan make:controller User\CategoryController
+php artisan make:controller User\PostController
+php artisan make:seeder UserSeeder
+php artisan make:seeder RoleSeeder
+php artisan make:seeder PermissionSeeder
+
+=====> Install Laravel Spatie Permission Package
+composer require spatie/laravel-permission
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+php artisan optimize:clear
+php artisan migrate:fresh --seed
+Go to App\Models\user and add use HasRoles; to the role model 
+
+=====> Register middlewares
+Go to App\Http\Kernal.php and paste the following middlewares
+'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+      
+
+create  UserSeeder & create 2 users admin & user inside it
+php artisan make:seeder RoleSeeder
+create RoleSeedr & create 2 roles admin & user inside it
+php artisan make:seeder UserSeeder
+php artisan migrate:fresh --seed
+
+
+
+=====> Create Routes
+create admin routes
+create user routes
+ 
+=====> Create Controllers, Models, Migrations, Factories & Seeders
+Create controllers, models, migrations, factories & seeders for category, post & comment
+create controllers for role & permission
+
+
+=====> To Assign A Role 
+assignRole('name of role');
+
+=====> Use Image Intervention Laravel Package
+composer require intervention/image
+add the follwong code to config\app.php in providers array
+Intervention\Image\ImageServiceProvider::class
+add the follwing code to config\app.php in alliases array
+'Image' => Intervention\Image\Facades\Image::class
+
